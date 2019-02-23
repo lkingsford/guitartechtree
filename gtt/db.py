@@ -4,7 +4,11 @@ from gtt import app
 from flask import g
 
 def create_sqlite3(path):
-    return sqlite3.connect(path);
+    conn = sqlite3.connect(path);
+
+    # Return rows instead of tuples
+    conn.row_factory = sqlite3.Row
+    return conn
 
 
 db_name_to_create = {
