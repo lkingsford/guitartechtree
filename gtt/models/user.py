@@ -19,9 +19,9 @@ class User:
     @classmethod
     def from_row(cls, result_row):
         user = User()
-        user.id = result_row[0]
-        user.username = result_row[1]
-        user.hashed_password = result_row[2]
+        user.id = result_row['user_id']
+        user.username = result_row['username']
+        user.hashed_password = result_row['hashed_password']
         return user
 
     @classmethod
