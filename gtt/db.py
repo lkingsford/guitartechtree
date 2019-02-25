@@ -4,9 +4,7 @@ from gtt import app
 from flask import g
 
 def create_sqlite3(path):
-    conn = sqlite3.connect(path);
-
-    # Return rows instead of tuples
+    conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -29,5 +27,3 @@ def teardown_db(error_code):
     db = g.pop('db', None)
     if db is not None:
         db.close()
-
-
