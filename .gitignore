@@ -94,6 +94,7 @@ celerybeat-schedule
 .venv
 env/
 venv/
+envwin/
 ENV/
 env.bak/
 venv.bak/
@@ -115,3 +116,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# VSCode
+settings.json
+.vscode/
