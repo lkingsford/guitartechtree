@@ -1,4 +1,5 @@
 from gtt import db
+from gtt.models import Technique
 
 class Work:
     """A work that can be learned by a user
@@ -55,3 +56,43 @@ class Work:
             return Work.from_row(result)
         else:
             return None
+
+    def techniques(self):
+        """Get a list of required techniques to play this work from the
+           database"""
+        if self.id is None:
+            # If not saved, no saved techniques yet
+            return []
+
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute(""" SELECT "technique".* FROM "technique"
+                        LEFT JOIN "work_technique"
+                        ON "work_technique"."technique_id" = "technique"."id"
+                        WHERE "work_technique"."work_id" = ? """, \
+                        (str(self.id),));
+        result = cur.fetchall()
+        return [Technique.from_row(i) for i in result];
+
+    def add_technique(self, technique_to_add):
+        """Add a technique required to perform the work"""
+        if self.id is None:
+            raise ReferenceError("Must save work before adding technique")
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute("""INSERT INTO "work_technique" (
+                        "work_id",
+                        "technique_id"
+                        ) VALUES (?, ?)""", \
+                    (str(self.id), str(technique_to_add.id)))
+
+    def remove_technique(self, technique_to_remove):
+        """Remove a technique required to perform the work"""
+        if self.id is None:
+            raise ReferenceError("Must save work before removing technique")
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute("""DELETE FROM "work_technique" WHERE
+                        "work_id" = ? AND
+                        "technique_id" = ?)""", \
+                        (str(self.id), str(technique_to_remove.id)))
