@@ -22,20 +22,32 @@ CREATE TABLE "technique_prereq" (
     "technique_to_learn_id" INTEGER NOT NULL,
     FOREIGN KEY ("technique_base_id") REFERENCES "technique"("technique_id")
     FOREIGN KEY ("technique_to_learn_id") REFERENCES "technique"("technique_to_learn_id")
+    -- Todo: Add uniquess constraint. Maybe remove primary key too.
 );
 
--- A works that somebody might learn
+-- A work that somebody might learn
 CREATE TABLE "work" (
     "id" INTEGER PRIMARY KEY ASC,
     "name" TEXT NOT NULL
 );
 
--- A link to a works
+-- A link attached to a work
 CREATE TABLE "work_link" (
     "id" INTEGER PRIMARY KEY ASC,
     -- For now - 1 for Affiliate, 2 for Stream
     "link_type" INTEGER NOT NULL,
     "href" TEXT NOT NULL,
-    "works_id" INTEGER NOT NULL,
-    FOREIGN KEY ("works_id") REFERENCES "works"("works_id")
+    "work_id" INTEGER NOT NULL,
+    FOREIGN KEY ("work_id") REFERENCES "work"("work_id")
+    -- Todo: Add uniquess constraint. Maybe remove primary key too.
 );
+
+-- A required technique to perform a work
+CREATE TABLE "work_technique" (
+    "id" INTEGER PRIMARY KEY ASC,
+    "work_id" INTEGER NOT NULL,
+    "technique_id" INTEGER NOT NULL,
+    FOREIGN KEY ("technique_id") REFERENCES "technique"("technique_id")
+    FOREIGN KEY ("work_id") REFERENCES "work"("work_id")
+    -- Todo: Add uniquess constraint. Maybe remove primary key too.
+)
