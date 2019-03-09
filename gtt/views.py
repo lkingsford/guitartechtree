@@ -18,4 +18,4 @@ def login():
 @app.route("/private/<user_id>")
 @auth.logged_in
 def private(user_id):
-    return User.find(user_id=user_id).username
+    return User.find(id=user_id).username

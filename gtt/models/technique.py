@@ -55,5 +55,4 @@ class Technique:
         result = cur.fetchone()
         if result is not None:
             return Technique.from_row(result)
-        else:
-            return None
+        return None

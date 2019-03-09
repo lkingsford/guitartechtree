@@ -36,8 +36,17 @@ class Work:
         cur.execute("""INSERT INTO "work" (
                         "name"
                         ) VALUES (?)""", \
-        # The comma after name is to force it to be a tuple, as Sqlite3 requires
                        (self.name,))
+        # The comma after name is to force it to be a tuple, as Sqlite3 requires
+        self.id = cur.lastrowid
+
+    def remove(self):
+        """Remove this work from the DB"""
+        # Do not delete links etc - ON DELETE CASCADE in the DB
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute("""DELETE FROM "work" WHERE "id" = ?""", \
+                       (self.id,))
         self.id = cur.lastrowid
 
     @classmethod
@@ -70,9 +79,9 @@ class Work:
                         LEFT JOIN "work_technique"
                         ON "work_technique"."technique_id" = "technique"."id"
                         WHERE "work_technique"."work_id" = ? """, \
-                        (str(self.id),));
+                        (str(self.id),))
         result = cur.fetchall()
-        return [Technique.from_row(i) for i in result];
+        return [Technique.from_row(i) for i in result]
 
     def add_technique(self, technique_to_add):
         """Add a technique required to perform the work"""
