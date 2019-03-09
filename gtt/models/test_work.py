@@ -35,3 +35,17 @@ def test_attach_read_technique(basic_work: Work):
     assert read_techniques[0].name == write_technique.name
 
 
+@pytest.mark.usefixtures("database")
+def test_attach_read_link(basic_work: Work):
+    """Create a work in the database, create a link, attach the link
+    to the work. Read back the link to see if it's there."""
+
+    href = "http://example.com"
+    link_type = LinkType.STREAM
+    basic_work.add_link(href, link_type)
+
+    read_links = basic_work.links()
+    assert len(read_links) == 1
+    assert read_links[0].href == href
+    assert read_links[0].link_type == link_type
+    assert read_links[0].work_id == basic_work.id
