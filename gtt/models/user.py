@@ -11,6 +11,7 @@ class User:
         self.can_su = False
         self.can_manage_works = False
         self.can_manage_users = False
+        self.can_manage_techniques = False
 
     def to_session(self):
         """Save a user object to the session"""
@@ -71,11 +72,11 @@ class User:
         self.id = cur.lastrowid
 
     @classmethod
-    def find(cls, username = None, id = None):
+    def find(cls, username=None, user_id=None):
         """Find a given user in the DB"""
-        if username is None and id is None:
+        if username is None and user_id is None:
             raise UnboundLocalError('username or id must be defined')
-        if username is not None and id is not None:
+        if username is not None and user_id is not None:
             raise ValueError('Only one of username or id can be defined')
 
         conn = db.get_db()
@@ -84,7 +85,7 @@ class User:
         if username is not None:
             cur.execute("SELECT * FROM user WHERE username=?", username)
         elif id is not None:
-            cur.execute("SELECT * FROM user WHERE id=?", str(id))
+            cur.execute("SELECT * FROM user WHERE id=?", str(user_id))
 
         result = cur.fetchone()
         if result is not None:

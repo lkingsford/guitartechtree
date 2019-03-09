@@ -1,9 +1,9 @@
 """Fixtures to use in unit tests"""
-from flask import g
 from pathlib import Path
 import pytest
+from flask import g
+from gtt.models import Work
 import gtt
-import sqlite3
 
 @pytest.fixture(scope="session")
 def database():
@@ -16,3 +16,12 @@ def database():
         g.db.executescript(init_sql)
 
         yield g.db
+
+@pytest.fixture
+def basic_work():
+    write_work = Work()
+    write_work.name = "Song"
+    write_work.save()
+    yield write_work
+
+    write_work.remove()

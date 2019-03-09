@@ -1,5 +1,4 @@
 from flask import session
-from gtt import db
 from gtt.models import User
 
 def _unauthorized_default():
