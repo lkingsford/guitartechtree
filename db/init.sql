@@ -47,7 +47,13 @@ CREATE TABLE "work_technique" (
     "id" INTEGER PRIMARY KEY ASC,
     "work_id" INTEGER NOT NULL,
     "technique_id" INTEGER NOT NULL,
-    FOREIGN KEY ("technique_id") REFERENCES "technique"("technique_id")
-    FOREIGN KEY ("work_id") REFERENCES "work"("work_id")
+    CONSTRAINT "fk_work_technique_technique"
+        FOREIGN KEY ("technique_id")
+        REFERENCES "technique"("technique_id")
+        ON DELETE CASCADE
+    CONSTRAINT "fk_work_technique_work"
+        FOREIGN KEY ("work_id")
+        REFERENCES "work"("work_id")
+        ON DELETE CASCADE
     -- Todo: Add uniquess constraint. Maybe remove primary key too.
 )

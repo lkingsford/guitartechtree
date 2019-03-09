@@ -1,5 +1,5 @@
 from gtt import db
-from gtt.models import Technique
+from gtt.models import Technique, WorkLink, LinkType
 
 class Work:
     """A work that can be learned by a user
@@ -108,10 +108,18 @@ class Work:
 
     def links(self):
         """Get the list of links for this work from the database"""
-        conn = db.get_db()
-        cur = conn.cursor()
-        cur.execute(""" SELECT "work_link".* FROM "work_link"
-                        WHERE "work_technique"."work_id" = ? """, \
-                        (str(self.id),));
-        result = cur.fetchall()
-        return [WorkLink.from_row(i) for i in result];
+        return WorkLink.find_by_work(self)
+
+    def add_link(self, href: str, link_type: LinkType):
+        """Add a link to this work to the database"""
+        if self.id is None:
+            raise ReferenceError("Must save work before removing technique")
+        link_to_add = WorkLink()
+        link_to_add.link_type = link_type
+        link_to_add.href = href
+        link_to_add.work_id = self.id
+        link_to_add.save()
+
+    def remove_link(self, link: WorkLink):
+        """Remove a link from the database"""
+        link.remove_link(self)
