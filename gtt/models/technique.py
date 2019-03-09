@@ -21,7 +21,7 @@ class Technique:
     def save(self):
         """Save this technique to the DB"""
         if self.id is None:
-            self.create()
+            self._create()
             return
         conn = db.get_db()
         cur = conn.cursor()
@@ -31,7 +31,7 @@ class Technique:
                        WHERE "id" = ?""", \
                        (self.name, self.short_description, self.id))
 
-    def create(self):
+    def _create(self):
         """Insert this technique into the DB"""
         conn = db.get_db()
         cur = conn.cursor()
