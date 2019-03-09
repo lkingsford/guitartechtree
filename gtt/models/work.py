@@ -20,7 +20,7 @@ class Work:
     def save(self):
         """Save this work to the DB"""
         if self.id is None:
-            self.create()
+            self._create()
             return
         conn = db.get_db()
         cur = conn.cursor()
@@ -29,7 +29,7 @@ class Work:
                        WHERE "id" = ?""", \
                        (self.name, self.id))
 
-    def create(self):
+    def _create(self):
         """Insert this work into the DB"""
         conn = db.get_db()
         cur = conn.cursor()
@@ -96,3 +96,13 @@ class Work:
                         "work_id" = ? AND
                         "technique_id" = ?)""", \
                         (str(self.id), str(technique_to_remove.id)))
+
+    def links(self):
+        """Get the list of links for this work from the database"""
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute(""" SELECT "work_link".* FROM "work_link"
+                        WHERE "work_technique"."work_id" = ? """, \
+                        (str(self.id),));
+        result = cur.fetchall()
+        return [WorkLink.from_row(i) for i in result];

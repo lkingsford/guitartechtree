@@ -41,7 +41,7 @@ class User:
     def save(self):
         """Save this user to the DB"""
         if self.id is None:
-            self.create()
+            self._create()
             return
         conn = db.get_db()
         cur = conn.cursor()
@@ -56,7 +56,7 @@ class User:
                         self.can_su, self.can_manage_works,
                         self.can_manage_techniques, self.id))
 
-    def create(self):
+    def _create(self):
         """Insert this user into the DB"""
         conn = db.get_db()
         cur = conn.cursor()
