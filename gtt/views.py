@@ -1,21 +1,19 @@
+from flask import Response, request
 from gtt import app
 from gtt import db
 from gtt import auth
-from gtt.models import User
+from gtt.models import User, LoginFailedError
 
-#@app.route("/login", methods=['POST'])
-@app.route("/login")
+@app.route("/login", methods=['POST'])
 def login():
-    #user = auth.login(request.form['username'], request.form['password'])
-    user = auth.login('username', 'password')
-    if user is not None:
-        print('Success')
-        return 'Success'
-    else:
-        print('Login failed')
-        return 'Login Failed'
+    """Login with given POST method"""
+    try:
+        user = auth.login(request.form['username'], request.form['password'])
+    except LoginFailedError:
+        return Response('Login failed. Username or password incorrect.', 401)
+    return Response('Login successful')
 
-@app.route("/private/<user_id>")
+@app.route("/private_test/<user_id>")
 @auth.logged_in
-def private(user_id):
-    return User.find(id=user_id).username
+def private_test(user_id):
+    return User.find(user_id=user_id).username

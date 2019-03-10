@@ -47,7 +47,7 @@ class Work:
         cur = conn.cursor()
         cur.execute("""DELETE FROM "work" WHERE "id" = ?""", \
                        (self.id,))
-        self.id = cur.lastrowid
+        self.id = None
 
     @classmethod
     def find(cls, work_id):

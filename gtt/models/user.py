@@ -1,4 +1,9 @@
+from passlib.hash import argon2
 from gtt import db
+
+class LoginFailedError(Exception):
+    """Error used if username or password isn't a match"""
+    pass
 
 class User:
     """A user of GTT
@@ -16,6 +21,10 @@ class User:
     def to_session(self):
         """Save a user object to the session"""
         return { 'username': self.username }
+
+    def set_password(self, password):
+        """Set the hash password from a given password"""
+        self.hashed_password = argon2.hash(password)
 
     @classmethod
     def from_session(cls, session_dict):
@@ -52,10 +61,10 @@ class User:
                         "can_su" = ?,
                         "can_manage_works" = ?,
                         "can_manage_techniques" = ?
-                       WHERE "id" = ?""", \
+                       WHERE "id" = ?""",
                        (self.username, self.hashed_password, self.can_su,
-                        self.can_su, self.can_manage_works,
-                        self.can_manage_techniques, self.id))
+                        self.can_manage_works, self.can_manage_techniques,
+                        self.id))
 
     def _create(self):
         """Insert this user into the DB"""
@@ -66,10 +75,18 @@ class User:
                         hashed_password,
                         can_su,
                         can_manage_works,
-                        can_manage_techniques) VALUES (?, ?, ?, ?, ?)""", \
+                        can_manage_techniques) VALUES (?, ?, ?, ?, ?)""",
                         (self.username, self.hashed_password, self.can_su,
                          self.can_manage_works, self.can_manage_techniques))
         self.id = cur.lastrowid
+
+    def remove(self):
+        """Remove this user from the DB"""
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute("""DELETE FROM "user" WHERE "id" = ?""",
+            (self.id,))
+        self.id = None
 
     @classmethod
     def find(cls, username=None, user_id=None):
@@ -83,12 +100,22 @@ class User:
         cur = conn.cursor()
 
         if username is not None:
-            cur.execute("SELECT * FROM user WHERE username=?", username)
+            cur.execute('SELECT * FROM user WHERE username=?', (username,))
         elif id is not None:
-            cur.execute("SELECT * FROM user WHERE id=?", str(user_id))
+            cur.execute('SELECT * FROM user WHERE id=?', (user_id,))
 
         result = cur.fetchone()
         if result is not None:
             return User.from_row(result)
         else:
             return None
+
+    @classmethod
+    def attempt_login(cls, username, hashed_password):
+        """Attempt to login, and raise an error if fail"""
+        user = User.find(username=username)
+        if user is None:
+            raise LoginFailedError('Username not found')
+        if argon2.verify(hashed_password, user.hashed_password):
+            return user
+        raise LoginFailedError('Password incorred')

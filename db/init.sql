@@ -1,7 +1,7 @@
 -- A user of the application
 CREATE TABLE "user" (
     "id" INTEGER PRIMARY KEY ASC,
-    "username" TEXT NOT NULL,
+    "username" TEXT NOT NULL UNIQUE,
     "hashed_password" TEXT NOT NULL,
     "can_su" INT DEFAULT 0,
     "can_manage_works" INT NOT NULL DEFAULT 0,
