@@ -18,3 +18,12 @@ def logged_in(func):
         else:
             return func(*args, **kwargs)
     return func_wrapper
+
+@logged_in
+def can_manage_works(func):
+    """Raise an unauthorized error if the user can't manage works"""
+    def func_wrapper(*args, **kwargs):
+        user_session = User.from_session(session['user'])
+        if not user_session.can_manage_works:
+            return unauthorized()
+    return func_wrapper

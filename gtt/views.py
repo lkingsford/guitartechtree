@@ -1,4 +1,4 @@
-from flask import Response, request
+from flask import Response, request, render_template
 from gtt import app
 from gtt import db
 from gtt import auth
@@ -17,3 +17,7 @@ def login():
 @auth.logged_in
 def private_test(user_id):
     return User.find(user_id=user_id).username
+
+@app.route("/")
+def root():
+    return render_template('layout.j2', content='Content goes here')
