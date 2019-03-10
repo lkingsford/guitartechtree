@@ -7,12 +7,9 @@ def _unauthorized_default():
 unauthorized = _unauthorized_default
 
 def login(username, password):
-    if username != 'fail':
-        user = User()
-        session['user'] = user.to_session()
-        return user
-    else:
-        return None
+    user = User.attempt_login(username, password)
+    session['user'] = user.to_session()
+    return user
 
 def logged_in(func):
     def func_wrapper(*args, **kwargs):
