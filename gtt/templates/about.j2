@@ -1,0 +1,67 @@
+{% extends "layout.j2" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<h2> Where am I? </h2>
+<p>
+This site is here to help you get your butt in gear, and play some rocking
+guitar.
+</p>
+<p>
+    It's broken down into two broad categories:
+</p>
+<ul>
+    <li>Works; and</li>
+    <li>Techniques.</li>
+</ul>
+<p>
+    The idea is that you can figure out what songs you are able to play, what
+    songs you only have a little bit more to learn to be able to play, and
+    figure out what you need to learn to get better.
+</p>
+<p>
+    In time, there will hopefully be some way for you to plan what you can learn
+    to play something you want to be able to play, some tutorials to learn
+    techniques and songs, and ways to get sheet music for what you want to
+    learn.
+</p>
+<h2> Who am I? </h2>
+<img class="floating-l" src={{ url_for('static',
+    filename='about-bio-portrait.jpg') }}/>
+<p>
+    Hi. I'm Lachlan Kingsford. I'm an enthusiastic guitarist (who plays almost
+    anything with frets and some things without), guitar teacher, programmer
+    and scrum-master. I wanted this tool to help me help students, and I thought
+    it might help other people too.
+</p>
+<p>
+    You can checkout me and some of my work around the internet - such as:
+    <ul>
+        <li><a href="https://soundcloud.com/lachlan-kingsford">Soundcloud</a>
+            </li>
+        <li><a href="https://www.youtube.com/channel/UC-UIcFdJ8MAt1tFNz53D5ww">
+            YouTube</a></li>
+        <li><a href="https://www.facebook.com/lebkingsford/">Facebook</a></li>
+        <li><a href="https://twitter.com/thelochok">Twitter</a></li>
+        <li><a href="https://nerdygentleman.itch.io/">itch.io
+            (if very amateur game-dev is your thing)</a></li>
+        <li><a href="https://github.com/lkingsford/guitartechtree">GitHub</a>
+            </li>
+        <li><a href="https://www.linkedin.com/in/lkingsford">LinkedIn</a></li>
+    </ul>
+</p>
+<h2> What if I want to help? </h2>
+<p>
+    The easiest way to contribute to this site is to create an account, and
+    start suggesting works or techniques that are necessary to play the songs
+    that are there. Correcting mistakes is great!
+</p>
+<p>
+    This site is open source, and licensed under the Affero GPL. The current
+    master repo is on <a href="https://github.com/lkingsford/guitartechtree">
+    github</a>. Feel welcome to poke around the code, and make pull requests
+    for bugs and (after having a chat) new features.
+</p>
+<p>
+    If more people start helping, I might move it to an organisational repo.
+</p>
+{% endblock %}

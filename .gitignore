@@ -1,4 +1,8 @@
 instance/*
+
+# I'm using design for notes/svg/images
+design/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

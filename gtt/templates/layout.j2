@@ -1,12 +1,29 @@
 <!doctype html>
 <head>
-<title>{% block title %}{% endblock %}</title>
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-16x16.png')}}" sizes="16x16"/>
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-32x32.png')}}" sizes="32x32"/>
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-96x96.png')}}" sizes="96x96"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}"/>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-16x16.png')}}" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-32x32.png')}}" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-96x96.png')}}" sizes="96x96"/>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}"/>
+    {% block css %}{% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<nav>
-    <h1>GuitarTechTree</h1>
-</nav>
-{% block content %}{% endblock %}
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal">
+        <span class="pure-menu-heading">GuitarTechTree</span>
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="{{ url_for('about') }}" class="pure-menu-link">About</a></li>
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Techniques</a></li>
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Works</a></li>
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Login</a></li>
+        </ul>
+    </div>
+</div>
+<div class"body-pane">
+    <h1> {{ self.title() }}</h1>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</div>

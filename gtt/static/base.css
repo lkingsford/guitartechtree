@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Sans+Pro:900');
+
+/* Set palette for easy reuse */
+:root {
+    --color-1: #ffffff;
+    --color-2: #2b0000;
+    --color-3: #ff5555;
+    --color-4: #ffaaaa;
+    --color-5: #5fd38d;
+}
+
+body {
+    font-family: "Open Sans";
+    font-size: 14pt;
+    background-color: var(--color-1);
+    color: var(--color-2);
+}
+
+.body-pane {
+    margin: 40px;
+}
+
+h1 {
+    font-family: "Source Sans Pro";
+    font-size: 69pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-3);
+    text-shadow: 3px 0px var(--color-5);
+    margin: 100px;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: "Open Sans";
+    font-size: 20pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--color-4);
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.pure-menu-link {
+    color: var(--color-2);
+}
+
+.pure-menu-link:hover, .pure-menu-link:active {
+    background-color: var(--color-5);
+}
+
+.content {
+    margin: 60px;
+}
+
+.floating-l {
+    float: left;
+    margin: 20px;
+}
+
+.floating-r {
+    float: right;
+    margin: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    img.floating-l {
+        float: none;
+    }
+
+    img.floating-r {
+        float: none;
+    }
+}

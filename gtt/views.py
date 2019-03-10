@@ -21,3 +21,7 @@ def private_test(user_id):
 @app.route("/")
 def root():
     return render_template('layout.j2', content='Content goes here')
+
+@app.route("/about")
+def about():
+    return render_template('about.j2')
