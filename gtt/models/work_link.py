@@ -11,7 +11,7 @@ class WorkLink:
         self.link_type = None
         # A None link_type can not be saved
         self.href = None
-        self.work_id: int = None
+        self.work_id = None
 
     @classmethod
     def from_row(cls, result_row):
