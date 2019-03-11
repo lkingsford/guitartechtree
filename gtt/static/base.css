@@ -27,7 +27,7 @@ h1 {
     text-transform: uppercase;
     color: var(--color-3);
     text-shadow: 3px 0px var(--color-5);
-    margin: 100px;
+    margin: 30px 30px 30px 100px;
 }
 
 h2, h3, h4, h5, h6 {
@@ -51,6 +51,10 @@ h2, h3, h4, h5, h6 {
 
 .pure-menu-link:hover, .pure-menu-link:active {
     background-color: var(--color-5);
+}
+
+.pure-menu-link:hover, .submenu.pure-menu-link:active {
+    background-color: var(--color-4);
 }
 
 .home-menu .pure-menu-heading {
@@ -84,4 +88,53 @@ h2, h3, h4, h5, h6 {
     img.floating-r {
         float: none;
     }
+}
+
+input.no-border {
+    border: 0;
+}
+
+input.no-border:hover, input.no-border:focus {
+    border: 3px solid var(--color-2);
+    border-radius: 3px;
+.home-menu .pure-menu-heading {
+    background-color: var(--color-5);
+}
+
+.home-menu .pure-menu-heading a {
+    color: var(--color-2);
+    text-decoration: none;
+}
+
+.content {
+    margin: 60px;
+}
+
+.floating-l {
+    float: left;
+    margin: 20px;
+}
+
+.floating-r {
+    float: right;
+    margin: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    img.floating-l {
+        float: none;
+    }
+
+    img.floating-r {
+        float: none;
+    }
+}
+
+input.no-border {
+    border: 0;
+}
+
+input.no-border:hover, input.no-border:focus {
+    border: 3px solid var(--color-2);
+    border-radius: 3px;
 }

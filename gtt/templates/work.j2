@@ -1,0 +1,13 @@
+{% extends "layout_with_content.j2" %}
+{% block title %}{{ work.name }}{% endblock %}
+{% if user.can_manage_works %}j
+{% block submenu_items %}
+<li class="pure-menu-item"><a href={{ url_for('edit_work', work_id=work.id) }} class="pure-menu-link">Edit Work</a></li>
+<li class="pure-menu-item"><a href={{ url_for('new_work') }} class="pure-menu-link">New Work</a></li>
+{% endblock %}
+{% endif %}
+{% block content %}
+<h2>Techniques to play</h2>
+<h2>Streams</h2>
+<h2>Sheet music</h2>
+{% endblock %}

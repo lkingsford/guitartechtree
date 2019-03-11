@@ -24,6 +24,11 @@
             {% endif %}
         </ul>
     </div>
+    <div class="home-menu pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list submenu">
+            {% block submenu_items %}{% endblock %}
+        </ul>
+    </div>
 </div>
 <div class"body-pane">
     {% block body_pane %}{% endblock %}

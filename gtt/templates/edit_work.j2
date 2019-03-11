@@ -1,0 +1,27 @@
+{% extends "layout_with_content.j2" %}
+{% block title %}
+{% if work is none %}
+Create Work
+{% else %}
+Edit Work
+{% endif %}
+{% endblock %}
+{% block submenu_items %}
+<li class="pure-menu-item"><a href={{ url_for('edit_work', work_id=work.id) }} class="pure-menu-link">Edit Work</a></li>
+<li class="pure-menu-item"><a href={{ url_for('new_work') }} class="pure-menu-link">New Work</a></li>
+{% endblock %}
+{% block content %}
+{% if work is none %}
+<form class="pure-form pure-form-aligned" action="{{ url_for("save_work", work_id=-1) }}" method="post">
+{% else %}
+<form class="pure-form pure-form-aligned" action="{{ url_for("save_work", work_id=work.id) }}" method="post">
+{% endif %}
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">Work Name</label>
+            <input type="text" name="name" type="text" {% if work is not none %} value="{{ work.name }}" {% else %} placeholder="Work name" {% endif %}/>
+        </div>
+        <button type="submit" class="pure-button">Save</button>
+    </fieldset>
+</form>
+{% endblock %}

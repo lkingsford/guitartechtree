@@ -1,3 +1,4 @@
+from functools import wraps
 from flask import session
 from gtt.models import User
 
@@ -7,6 +8,8 @@ def _unauthorized_default():
 unauthorized = _unauthorized_default
 
 def login(username, password):
+    """Attempt to login with given credentials, returning the user or raising
+    if unsuccessful"""
     user = User.attempt_login(username, password)
     session['user'] = user.to_session()
     return user
@@ -14,12 +17,13 @@ def login(username, password):
 def logout():
     session.pop('user')
 
-def logged_in(func):
+def logged_in(f):
+    @wraps(f)
     def func_wrapper(*args, **kwargs):
         if 'user' not in session:
             return unauthorized()
         else:
-            return func(*args, **kwargs)
+            return f(*args, **kwargs)
     return func_wrapper
 
 @logged_in

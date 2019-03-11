@@ -9,7 +9,8 @@ class User:
     """A user of GTT
     """
     def __init__(self):
-        """Create a blank user"""
+        """Create a blank user
+        These are also used for the default user if no user is logged in"""
         self.id = None
         self.username = None
         self.hashed_password = None
@@ -20,7 +21,12 @@ class User:
 
     def to_session(self):
         """Save a user object to the session"""
-        return { 'username': self.username }
+        return { 'username': self.username,
+                 'id': self.id,
+                 'can_su': self.can_su,
+                 'can_manage_works': self.can_manage_works,
+                 'can_manage_users': self.can_manage_users,
+                 'can_manage_techniques': self.can_manage_techniques }
 
     def set_password(self, password):
         """Set the hash password from a given password"""
@@ -32,8 +38,11 @@ class User:
         user = User()
         user.id = session_dict.get('id', user.id)
         user.username = session_dict.get('username', user.username)
-        user.hashed_password = session_dict.get('hashed_password',
-                user.hashed_password)
+        user.can_su = session_dict.get('can_su', user.can_su)
+        user.can_manage_works = session_dict.get('can_manage_works',
+            user.can_manage_works)
+        user.can_manage_techniques = session_dict.get('can_manage_works',
+            user.can_manage_techniques)
         return user
 
     @classmethod
