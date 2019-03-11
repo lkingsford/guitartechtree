@@ -1,0 +1,7 @@
+{% extends "layout.j2" %}
+{% block body_pane %}
+    <h1> {{ self.title() }}</h1>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

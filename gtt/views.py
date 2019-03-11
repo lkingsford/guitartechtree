@@ -19,8 +19,8 @@ def private_test(user_id):
     return User.find(user_id=user_id).username
 
 @app.route("/")
-def root():
-    return render_template('layout.j2', content='Content goes here')
+def index():
+    return render_template('index.j2')
 
 @app.route("/about")
 def about():

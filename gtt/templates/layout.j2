@@ -12,7 +12,7 @@
 </head>
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal">
-        <span class="pure-menu-heading">GuitarTechTree</span>
+        <span class="pure-menu-heading"><a href="{{ url_for('index') }}">GuitarTechTree</a></span>
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a href="{{ url_for('about') }}" class="pure-menu-link">About</a></li>
             <li class="pure-menu-item"><a href="#" class="pure-menu-link">Techniques</a></li>
@@ -22,8 +22,5 @@
     </div>
 </div>
 <div class"body-pane">
-    <h1> {{ self.title() }}</h1>
-    <div class="content">
-        {% block content %}{% endblock %}
-    </div>
+    {% block body_pane %}{% endblock %}
 </div>

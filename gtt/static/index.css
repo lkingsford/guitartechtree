@@ -1,0 +1,19 @@
+h1 {
+    margin: 0;
+}
+
+.splash {
+    margin: auto;
+    position: absolute;
+    width: 80%;
+    height: 50%;
+    left: 10%;
+    top: 20%;
+    text-align: center;
+}
+
+.splash-head {
+    border: 3px solid var(--color-5);
+    border-radius: 3px;
+    padding: 30px;
+}
