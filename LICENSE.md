@@ -1,8 +1,3 @@
-This product is dual licensed under the GNU Affero General Public License
-and a private license that does not require sharing of source. Please
-contact the author of this repository if you wish to license this product.
-
-
 GNU Affero General Public License
 =================================
 

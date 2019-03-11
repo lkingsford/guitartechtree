@@ -48,3 +48,8 @@ Bugs may be filed to this repo as an issue.
 Contributions may require a contribution agreement to allow the duel licensing
 or changes in the licensing in the future. As always, the project may be forked
 and retain the current license.
+
+## License
+
+Licensed under Affero GPL per [License.md](LICENSE.md). Licensing under a non
+share-alike license is available by email to Lachlan Kingsford.
