@@ -2,7 +2,7 @@ from flask import Response, request, render_template
 from gtt import app
 from gtt import db
 from gtt import auth
-from gtt.models import User, LoginFailedError
+from gtt.models import User, LoginFailedError, Technique, Work
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -13,15 +13,26 @@ def login():
         return Response('Login failed. Username or password incorrect.', 401)
     return Response('Login successful')
 
-@app.route("/private_test/<user_id>")
-@auth.logged_in
-def private_test(user_id):
-    return User.find(user_id=user_id).username
+@app.route("/technique/<technique_id>")
+def view_technique(technique_id):
+    """View a given technique"""
+    return render_template('technique.j2',
+        technique=Technique.find(technique_id),
+        user=auth.session_user())
+
+@app.route("/work/<work_id>")
+def view_work(work_id):
+    """View a work"""
+    return render_template('work.j2',
+        work=Work.find(work_id),
+        user=auth.session_user())
 
 @app.route("/")
 def index():
+    """Return index page"""
     return render_template('index.j2')
 
 @app.route("/about")
 def about():
+    """Return the about page"""
     return render_template('about.j2')

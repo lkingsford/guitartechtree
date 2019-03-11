@@ -14,6 +14,6 @@ h1 {
 
 .splash-head {
     border: 3px solid var(--color-5);
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 30px;
 }

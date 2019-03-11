@@ -1,0 +1,9 @@
+{% extends "layout_with_content.j2" %}
+{% block title %}{{ work.name }}{% endblock %}
+{% block content %}
+<form class="pure-form">
+    <fieldset>
+        <input type="song_name" placeholder="{{ work.name }}">
+    </fieldset>
+</form>
+{% endblock %}
