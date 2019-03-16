@@ -11,6 +11,9 @@ def login(username, password):
     session['user'] = user.to_session()
     return user
 
+def logout():
+    session.pop('user')
+
 def logged_in(func):
     def func_wrapper(*args, **kwargs):
         if 'user' not in session:
@@ -27,3 +30,9 @@ def can_manage_works(func):
         if not user_session.can_manage_works:
             return unauthorized()
     return func_wrapper
+
+def session_user():
+    """Return the user that is currently logged in per the session"""
+    if 'user' not in session:
+        return None
+    return User.from_session(session['user'])

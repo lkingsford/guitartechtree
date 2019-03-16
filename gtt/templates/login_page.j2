@@ -1,0 +1,11 @@
+{% extends "layout_with_content.j2" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form class="pure-form" action="{{ url_for("login") }}"" method="post">
+    <fieldset>
+        <input name="username" id="username" type="text" placeholder="Username"/><br>
+        <input name="password" id="password" type="password" placeholder="Password"/></br>
+    </fieldset>
+    <button type="submit" class="pure-button">Sign in</button>
+</form>
+{% endblock %}

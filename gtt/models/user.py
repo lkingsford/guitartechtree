@@ -100,7 +100,7 @@ class User:
         cur = conn.cursor()
 
         if username is not None:
-            cur.execute('SELECT * FROM user WHERE username=?', (username,))
+            cur.execute('SELECT * FROM user WHERE username=? COLLATE NOCASE', (username,))
         elif id is not None:
             cur.execute('SELECT * FROM user WHERE id=?', (user_id,))
 
