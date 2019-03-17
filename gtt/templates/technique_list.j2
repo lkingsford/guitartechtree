@@ -1,0 +1,18 @@
+{% extends "layout_with_content.j2" %}
+{% block title %}Techniques{% endblock %}
+{% if user.can_manage_techniques %}j
+{% block submenu_items %}
+<li class="pure-menu-item"><a href={{ url_for('new_technique') }} class="pure-menu-link">New Technique</a></li>
+{% endblock %}
+{% endif %}
+{% block content %}
+<table class="pure-table">
+    <tbody>
+    {% for technique in techniques %}
+        <tr>
+            <td><a href="{{url_for("view_technique", technique_id=technique.id)}}">{{technique.name}}</a></td>
+        <tr>
+    {% endfor %}
+<tbody>
+</table>
+{% endblock %}

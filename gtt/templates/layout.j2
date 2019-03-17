@@ -15,8 +15,8 @@
         <span class="pure-menu-heading"><a href="{{ url_for('index') }}">GuitarTechTree</a></span>
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a href="{{ url_for('about') }}" class="pure-menu-link">About</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Techniques</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Works</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('technique_list') }}" class="pure-menu-link">Techniques</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('work_list') }}" class="pure-menu-link">Works</a></li>
             {% if user is not defined or user is none %}
             <li class="pure-menu-item"><a href="{{ url_for('login_page') }}" class="pure-menu-link">Login</a></li>
             {% else %}

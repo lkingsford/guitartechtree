@@ -134,3 +134,10 @@ def work_list():
     return render_template('work_list.j2',
                            works=Work.find_all(),
                            **state())
+
+@app.route("/technique_list")
+def technique_list():
+    """List techniques"""
+    return render_template('technique_list.j2',
+                            techniques=Technique.find_all(),
+                            **state())

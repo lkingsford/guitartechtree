@@ -56,3 +56,11 @@ class Technique:
         if result is not None:
             return Technique.from_row(result)
         return None
+
+    @classmethod
+    def find_all(cls):
+        """Find all works in the DB"""
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM technique ORDER BY name")
+        return [Technique.from_row(row) for row in cur]
