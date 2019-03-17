@@ -5,7 +5,7 @@ from flask import g
 from gtt.models import Work, User
 import gtt
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def database():
     """Create an in-memory database to use for testing, instantiated with the
     SQL from db/init.sql"""

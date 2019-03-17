@@ -1,5 +1,5 @@
 """Test the views in views.py"""
-
+import pytest
 import gtt.views
 from gtt.fixtures import client, basic_user, database
 
@@ -7,6 +7,7 @@ from gtt.fixtures import client, basic_user, database
 # pylint: disable=redefined-outer-name
 # pylint: disable=unused-argument
 
+@pytest.mark.usefixtures("database")
 def test_basic_login(basic_user, client, database):
     """Test that logging in with a correct username and password does not
     return an access denied status"""
@@ -18,6 +19,7 @@ def test_basic_login(basic_user, client, database):
         password=password))
     assert response.status_code != 401
 
+@pytest.mark.usefixtures("database")
 def test_login_fail(basic_user, client, database):
     """Test that logging in with an incorrect password results in a 401"""
     password = 'Password'

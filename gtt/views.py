@@ -127,3 +127,10 @@ def new_work():
                 **state())
     return Response('User not logged in or not authorized to manage works.',
         401)
+
+@app.route("/work_list")
+def work_list():
+    """List works"""
+    return render_template('work_list.j2',
+                           works=Work.find_all(),
+                           **state())

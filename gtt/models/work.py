@@ -66,6 +66,14 @@ class Work:
         else:
             return None
 
+    @classmethod
+    def find_all(cls):
+        """Find all works in the DB"""
+        conn = db.get_db()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM work ORDER BY name")
+        return [Work.from_row(row) for row in cur]
+
     def techniques(self):
         """Get a list of required techniques to play this work from the
            database"""

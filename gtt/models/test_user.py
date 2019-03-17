@@ -24,7 +24,7 @@ def test_create_read():
     assert read_user.can_manage_techniques == write_user.can_manage_techniques
     assert read_user.can_su == write_user.can_su
 
-@pytest.mark.userfixtures('database')
+@pytest.mark.usefixtures('database')
 def test_attempt_login_correct_password(basic_user):
     """Test setting a password hash, then logging in with it."""
     password = 'Plain Text Password'
@@ -35,7 +35,7 @@ def test_attempt_login_correct_password(basic_user):
     # At least check it's the right user
     assert read_user.id == basic_user.id
 
-@pytest.mark.userfixtures('database')
+@pytest.mark.usefixtures('database')
 def test_attempt_login_incorrect_password(basic_user):
     """Test setting a password hash, then logging in with a different password
     """
@@ -45,7 +45,7 @@ def test_attempt_login_incorrect_password(basic_user):
     with pytest.raises(LoginFailedError):
         User.attempt_login(basic_user.username, 'Wrong Password')
 
-@pytest.mark.userfixtures('database')
+@pytest.mark.usefixtures('database')
 def test_attempt_login_incorrect_username(basic_user):
     """Test logging in with a correct password but incorrect username"""
     password = 'Plain Text Password'

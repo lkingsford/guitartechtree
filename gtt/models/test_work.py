@@ -49,3 +49,16 @@ def test_attach_read_link(basic_work: Work):
     assert read_links[0].href == href
     assert read_links[0].link_type == link_type
     assert read_links[0].work_id == basic_work.id
+
+@pytest.mark.usefixtures("database")
+def test_find_all():
+    """Write 3 works to the database, then test that they are returned with
+    find_all()"""
+    for i in range(3):
+        work = Work()
+        work.name = str(i)
+        work.save()
+    works = Work.find_all()
+    for i in range(3):
+        assert works[i].name == str(i)
+    assert len(works) == 3
