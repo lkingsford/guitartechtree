@@ -26,7 +26,7 @@ class Technique:
         conn = db.get_db()
         cur = conn.cursor()
         cur.execute("""UPDATE "technique" SET
-                        "name" = ?
+                        "name" = ?,
                         "short_description" = ?
                        WHERE "id" = ?""", \
                        (self.name, self.short_description, self.id))

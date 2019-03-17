@@ -1,0 +1,27 @@
+{% extends "layout_with_content.j2" %}
+{% block title %}
+{% if work is none %}
+Create Technique
+{% else %}
+Edit Technique
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if technique is none %}
+<form class="pure-form pure-form-aligned" action="{{ url_for("save_technique", technique_id=-1) }}" method="post">
+{% else %}
+<form class="pure-form pure-form-aligned" action="{{ url_for("save_technique", technique_id=technique.id) }}" method="post">
+{% endif %}
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">Technique Name</label>
+            <input type="text" name="name" {% if technique is not none %} value="{{ technique.name }}" {% else %} placeholder="Technique name" {% endif %}/>
+        </div>
+        <div class="pure-control-group">
+            <label for="short_description">Short description</label>
+            <textarea name="short_description" class="pure-input" {% if technique is none %} placeholder="Technique short description" {% endif %}/>{% if technique is not none %}{{ technique.short_description }}{% endif %}</textarea>
+        </div>
+        <button type="submit" class="pure-button">Save</button>
+    </fieldset>
+</form>
+{% endblock %}

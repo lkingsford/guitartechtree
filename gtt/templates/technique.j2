@@ -2,9 +2,10 @@
 {% block title %}{{ technique.name }}{% endblock %}
 {% if user.can_manage_techniques %}
 {% block submenu_items %}
-<li class="pure-menu-item"><a href={{ url_for('edit_technique', work_id=work.id) }} class="pure-menu-link">Edit Technique</a></li>
+<li class="pure-menu-item"><a href={{ url_for('edit_technique', technique_id=technique.id) }} class="pure-menu-link">Edit Technique</a></li>
 <li class="pure-menu-item"><a href={{ url_for('new_technique') }} class="pure-menu-link">New Technique</a></li>
-{% endif %}
 {% endblock %}
+{% endif %}
 {% block content %}
+{{ technique.short_description }}
 {% endblock %}

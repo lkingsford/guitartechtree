@@ -46,7 +46,7 @@ def view_technique(technique_id):
 def edit_technique(technique_id):
     """Edit a given technique"""
     if auth.session_user().can_manage_techniques:
-        return render_template('technique_edit.j2',
+        return render_template('edit_technique.j2',
                 technique=Technique.find(technique_id),
                 **state())
     return Response('User not logged in or not authorized to manage techniques.',
@@ -57,11 +57,30 @@ def edit_technique(technique_id):
 def new_technique():
     """Create a technique"""
     if auth.session_user().can_manage_techniques:
-        return render_template('technique.j2',
+        return render_template('edit_technique.j2',
                 technique=None,
                 **state())
     return Response('User not logged in or not authorized to manage techniques.',
         401)
+
+@app.route("/technique/<technique_id>", methods=["POST"])
+@auth.logged_in
+def save_technique(technique_id):
+    """Save a given technique"""
+    if not auth.session_user().can_manage_techniques:
+        return Response('User not logged in or not authorized to manage techniques.',
+                401)
+    if int(technique_id) == -1:
+        # New work
+        technique = Technique()
+    else:
+        # Existing technique
+        technique = Technique.find(technique_id)
+    technique.name = request.form['name']
+    technique.short_description = request.form['short_description']
+    technique.save()
+    db.get_db().commit()
+    return redirect(url_for("view_technique", technique_id=technique.id))
 
 @app.route("/work/<work_id>/edit")
 def edit_work(work_id):
@@ -81,8 +100,12 @@ def view_work(work_id):
         **state())
 
 @app.route("/work/<work_id>", methods=['POST'])
+@auth.logged_in
 def save_work(work_id):
     """Save a work"""
+    if not auth.session_user().can_manage_works:
+        return Response('User not logged in or not authorized to manage works.',
+                401)
     if int(work_id) == -1:
         # New work
         work = Work()
