@@ -38,5 +38,5 @@ def can_manage_works(func):
 def session_user():
     """Return the user that is currently logged in per the session"""
     if 'user' not in session:
-        return None
+        return User()
     return User.from_session(session['user'])

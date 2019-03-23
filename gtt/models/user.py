@@ -32,6 +32,10 @@ class User:
         """Set the hash password from a given password"""
         self.hashed_password = argon2.hash(password)
 
+    def guest(self):
+        """Return if a real logged in user or a guest"""
+        return self.id is None
+
     @classmethod
     def from_session(cls, session_dict):
         """Get a User object from the session"""

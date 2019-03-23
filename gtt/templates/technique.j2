@@ -1,11 +1,11 @@
 {% extends "layout_with_content.j2" %}
 {% block title %}{{ technique.name }}{% endblock %}
-{% if user.can_manage_techniques %}
 {% block submenu_items %}
+{% if user.can_manage_techniques %}
 <li class="pure-menu-item"><a href={{ url_for('edit_technique', technique_id=technique.id) }} class="pure-menu-link">Edit Technique</a></li>
 <li class="pure-menu-item"><a href={{ url_for('new_technique') }} class="pure-menu-link">New Technique</a></li>
-{% endblock %}
 {% endif %}
+{% endblock %}
 {% block content %}
 {{ technique.short_description }}
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends "layout_with_content.j2" %}
 {% block title %}Works{% endblock %}
-{% if user.can_manage_works %}j
 {% block submenu_items %}
-<li class="pure-menu-item"><a href={{ url_for('new_work') }} class="pure-menu-link">new work</a></li>
-{% endblock %}
+{% if user.can_manage_works %}
+<li class="pure-menu-item"><a href={{ url_for('new_work') }} class="pure-menu-link">New Work</a></li>
 {% endif %}
+{% endblock %}
 {% block content %}
 <table class="pure-table">
     <tbody>
