@@ -97,6 +97,8 @@ input.no-border {
 input.no-border:hover, input.no-border:focus {
     border: 3px solid var(--color-2);
     border-radius: 3px;
+}
+
 .home-menu .pure-menu-heading {
     background-color: var(--color-5);
 }
@@ -137,4 +139,14 @@ input.no-border {
 input.no-border:hover, input.no-border:focus {
     border: 3px solid var(--color-2);
     border-radius: 3px;
+}
+
+a, a:visited {
+    color: var(--color-3);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-2);
+    text-decoration: underline;
 }
