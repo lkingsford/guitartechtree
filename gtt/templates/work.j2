@@ -8,6 +8,15 @@
 {% endblock %}
 {% block content %}
 <h2>Techniques to play</h2>
+<table class="pure-table">
+    <tbody>
+    {% for technique in work.techniques() %}
+        <tr>
+            <td><a href="{{ url_for("view_technique", technique_id=technique.id) }}">{{technique.name}}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 <h2>Streams</h2>
 <h2>Sheet music</h2>
 {% endblock %}
